@@ -9,8 +9,8 @@ import { User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private userSubject: BehaviorSubject<User | null>;
-    public user: Observable<User | null>;
+    private userSubject: BehaviorSubject<any>;
+    public user: Observable<any>;
 
     constructor(
         private router: Router,
@@ -25,13 +25,9 @@ export class AccountService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
-            }));
+      console.log(username , password , 'test');
+
+        return this.http.post(`${environment.apiUrl}/api/v1/auth/login`, { "login": username, "password": password })
     }
 
     logout() {

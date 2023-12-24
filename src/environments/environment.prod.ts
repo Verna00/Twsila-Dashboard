@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:4000'
+    apiUrl: 'https://twsila-dev-service-f33wiujt7a-lm.a.run.app'
 };

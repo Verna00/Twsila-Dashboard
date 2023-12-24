@@ -6,7 +6,7 @@ import { AccountService } from '../_services/account.service';
 
 
 
-@Component({ 
+@Component({
     selector: 'app-login',
     templateUrl: 'login.component.html',
     styleUrls: ['./login.component.scss']
@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            username: ['test', Validators.required],
-            password: ['test', Validators.required]
+            login: ['', Validators.required],
+            password: ['', Validators.required]
         });
     }
 
@@ -51,15 +51,18 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.login(this.f['username'].value, this.f['password'].value)
-            .pipe(first())
+        this.accountService.login(this.f['login'].value, this.f['password'].value)
             .subscribe({
-                next: () => {
+                next: (res:any) => {
+                  console.log(res);
+
                     // get return url from query parameters or default to home page
                     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
                     this.router.navigateByUrl(returnUrl);
                 },
-                error: (error: string | undefined) => {
+                error: (error:any) => {
+                  console.log(error , 'error');
+
                     this.error = error;
                     this.loading = false;
                 }
