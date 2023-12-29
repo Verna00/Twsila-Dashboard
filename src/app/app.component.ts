@@ -26,9 +26,9 @@ export class AppComponent implements OnInit {
       {
 
         items: [
-          {
-            label: 'Reset', "routerLink": ['register']
-          },
+          // {
+          //   label: 'Reset', "routerLink": ['register']
+          // },
           {
             label: 'logout', command: () => this.logout()
           }
