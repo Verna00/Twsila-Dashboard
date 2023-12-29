@@ -4,18 +4,12 @@
         <div class="col-sm-7 d-flex justify-content-center">
 
             <div class="card-body">
-                <div class="info">
-                    <p> username:test</p>
-                    <p> password:test</p>
-                </div>
-
-
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" formControlName="login" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
                         <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
-                            <div *ngIf="f.login.errors.required">Email  is required</div>
+                            <div *ngIf="f.login.errors.required">Email is required</div>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -29,6 +23,13 @@
                         <button [disabled]="loading || form.invalid" class="btn  login-btn">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
                             Login
+                        </button>
+
+                    </div>
+                    <div>
+                        <button [disabled]="loading" class="btn  login-btn" routerLink="/register">
+                           
+                            reset
                         </button>
 
                     </div>
