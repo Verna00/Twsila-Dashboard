@@ -19,7 +19,7 @@ export class AdminUserComponent implements OnInit {
     { name: 'Alice',email: 'Alice@gmail.com' ,role: 'comapny' },
     { name: 'Bob',email: 'Bob@gmail.com' ,role: 'comapny' },
     { name: 'Ali',email: 'Ali@gmail.com' ,role: 'admin' }
-  
+
     // ... more mock data
   ];
 
@@ -42,18 +42,18 @@ export class AdminUserComponent implements OnInit {
     console.log('Editing:', item);
   }
 getalluser(){
-  this.accountService.getAll()
-  .pipe(first())
-  .subscribe(users => this.users = users);
+  // this.accountService.getAll()
+  // .pipe(first())
+  // .subscribe(users => this.users = users);
 }
 
   deleteUser(id: string) {
-    const user = this.users!.find(x => x.id === id);
-    user.isDeleting = true;
-    this.accountService.delete(id)
-        .pipe(first())
-        .subscribe(() => this.users = this.users!.filter(x => x.id !== id));
-}
+//     const user = this.users!.find(x => x.id === id);
+//     user.isDeleting = true;
+//     this.accountService.delete(id)
+//         .pipe(first())
+//         .subscribe(() => this.users = this.users!.filter(x => x.id !== id));
+ }
 }
 
 

@@ -45,24 +45,17 @@ export class LoginComponent implements OnInit {
         // reset alert on submit
         this.error = '';
 
-        // stop here if form is invalid
-        if (this.form.invalid) {
-            return;
-        }
-
         this.loading = true;
-        this.accountService.login(this.f['login'].value, this.f['password'].value)
-            .subscribe({
-                next: (res:any) => {
-                  console.log(res);
 
+        this.accountService.login(this.f['login'].value, this.f['password'].value)
+            .pipe(first())
+            .subscribe({
+                next: () => {
                     // get return url from query parameters or default to home page
                     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
                     this.router.navigateByUrl(returnUrl);
                 },
-                error: (error:any) => {
-                  console.log(error , 'error');
-
+                error: (error: string | undefined) => {
                     this.error = error;
                     this.loading = false;
                 }

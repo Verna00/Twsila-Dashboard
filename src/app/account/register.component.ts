@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-           
+
             currentpassword: ['', [Validators.required, Validators.minLength(6)]],
             password: ['', [Validators.required, Validators.minLength(6)]],
             confirmpassword: ['', [Validators.required, Validators.minLength(6)]]
@@ -43,17 +43,17 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.register(this.form.value)
-            .pipe(first())
-            .subscribe({
-                next: () => {
-                    this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-                    this.router.navigate(['../login'], { relativeTo: this.route });
-                },
-                error: error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                }
-            });
+        // this.accountService.register(this.form.value)
+        //     .pipe(first())
+        //     .subscribe({
+        //         next: () => {
+        //             this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+        //             this.router.navigate(['../login'], { relativeTo: this.route });
+        //         },
+        //         error: error => {
+        //             this.alertService.error(error);
+        //             this.loading = false;
+        //         }
+        //     });
     }
 }

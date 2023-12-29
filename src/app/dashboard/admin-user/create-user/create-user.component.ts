@@ -38,17 +38,17 @@ export class CreateUserComponent implements OnInit {
         });
 
         this.title = 'Add User';
-        if (this.id) {
-            // edit mode
-            this.title = 'Edit User';
-            this.loading = true;
-            this.accountService.getById(this.id)
-                .pipe(first())
-                .subscribe(x => {
-                    this.Addform.patchValue(x);
-                    this.loading = false;
-                });
-        }
+        // if (this.id) {
+        //     // edit mode
+        //     this.title = 'Edit User';
+        //     this.loading = true;
+        //     this.accountService.getById(this.id)
+        //         .pipe(first())
+        //         .subscribe(x => {
+        //             this.Addform.patchValue(x);
+        //             this.loading = false;
+        //         });
+        // }
     }
 
     // convenience getter for easy access to Addform fields
@@ -65,25 +65,20 @@ export class CreateUserComponent implements OnInit {
             return;
         }
 
-        this.submitting = true;
-        this.saveUser()
-            .pipe(first())
-            .subscribe({
-                next: () => {
-                    this.alertService.success('User saved', { keepAfterRouteChange: true });
-                    this.router.navigateByUrl('/users');
-                },
-                error: error => {
-                    this.alertService.error(error);
-                    this.submitting = false;
-                }
-            })
+        // this.submitting = true;
+        // this.saveUser()
+        //     .pipe(first())
+        //     .subscribe({
+        //         next: () => {
+        //             this.alertService.success('User saved', { keepAfterRouteChange: true });
+        //             this.router.navigateByUrl('/users');
+        //         },
+        //         error: error => {
+        //             this.alertService.error(error);
+        //             this.submitting = false;
+        //         }
+        //     })
     }
 
-    private saveUser() {
-        // create or update user based on id param
-        return this.id
-            ? this.accountService.update(this.id!, this.Addform.value)
-            : this.accountService.register(this.Addform.value);
-    }
+
 }
