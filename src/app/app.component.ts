@@ -15,11 +15,6 @@ export class AppComponent implements OnInit {
     private primengConfig: PrimeNGConfig) {
   }
   ngOnInit() {
-    if (this.accountService.isLoggedIn()) {
-      this.user = true;
-    } else {
-      this.user = false
-    }
     this.primengConfig.ripple = true;
 
     this.MenuItem = [
