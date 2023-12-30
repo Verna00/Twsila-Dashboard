@@ -21,7 +21,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
-import { RegisterComponent } from './account/register.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -45,8 +44,6 @@ import { RegisterComponent } from './account/register.component';
         AppComponent,
         AlertComponent,
         HomeComponent,
-        RegisterComponent
-
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

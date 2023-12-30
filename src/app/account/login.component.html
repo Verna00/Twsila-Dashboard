@@ -24,14 +24,7 @@
                             <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
                             Login
                         </button>
-
-                    </div>
-                    <div>
-                        <button [disabled]="loading" class="btn  login-btn" routerLink="/register">
-                           
-                            reset
-                        </button>
-
+                        <small>  don't have account <a routerLink="/account/create-account">create accont</a></small>
                     </div>
                 </form>
             </div>

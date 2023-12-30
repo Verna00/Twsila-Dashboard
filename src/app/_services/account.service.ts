@@ -35,6 +35,9 @@ export class AccountService {
             }));
     }
 
+    CreateAdminAccount(adminData:any) {
+      return this.http.post(`${environment.apiUrl}/admins/register`, adminData)
+  }
 
     isLoggedIn(){
       if(localStorage.getItem('token')){

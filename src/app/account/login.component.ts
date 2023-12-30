@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     form!: FormGroup;
     loading = false;
     submitted = false;
-    error?: string;
+    error:any
 
     constructor(
         private formBuilder: FormBuilder,
@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
                     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
                     this.router.navigateByUrl(returnUrl);
                 },
-                error: (error: string | undefined) => {
-                    this.error = error;
+                error: (error: any) => {
+                    this.error = error?.message;
                     this.loading = false;
                 }
             });

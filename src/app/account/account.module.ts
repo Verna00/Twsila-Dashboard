@@ -5,7 +5,8 @@ import { CommonModule } from '@angular/common';
 import { AccountRoutingModule } from './account-routing.module';
 import { LayoutComponent } from './layout.component';
 import { LoginComponent } from './login.component';
-import { RegisterComponent } from './register.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
     imports: [
@@ -16,8 +17,9 @@ import { RegisterComponent } from './register.component';
     declarations: [
         LayoutComponent,
         LoginComponent,
-      
+        ResetPasswordComponent,
+        CreateUserComponent
     ],
- 
+
 })
 export class AccountModule { }

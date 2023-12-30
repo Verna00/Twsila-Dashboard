@@ -3,29 +3,33 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home';
 import { AuthGuard } from './_helpers';
-import { RegisterComponent } from './account/register.component';
 
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 // const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
 
 const routes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard],
+  {
+    path: '', component: HomeComponent, canActivate: [AuthGuard],
     loadChildren: () =>
-    import('./dashboard/dashboard.module').then(
-      (m) => m.DashboardModule
-    ),
- },
+      import('./dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
+  },
 
- { path: 'register', component: RegisterComponent },
-    { path: 'account', loadChildren: accountModule },
+  {
+    path: 'account', loadChildren: () =>
+      import('./account/account.module').then(
+        (m) => m.AccountModule
+      ),
+  },
 
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
