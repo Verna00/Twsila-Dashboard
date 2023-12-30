@@ -7,7 +7,9 @@ import { AccountService, AlertService } from '@app/_services';
 
 @Component({
   selector: 'app-reset-password',
-  templateUrl: 'reset-password.component.html'
+  templateUrl: 'reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss']
+
 })
 export class ResetPasswordComponent implements OnInit {
   form!: FormGroup;
@@ -24,10 +26,10 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-
-      currentpassword: ['', [Validators.required, Validators.minLength(6)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, Validators.minLength(6)]]
+      email: ['', [Validators.required]],
+      oldPassword: ['', [Validators.required, Validators.minLength(8)]],
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+      repeatedNewPassword: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
@@ -46,17 +48,16 @@ export class ResetPasswordComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.accountService.register(this.form.value)
-    //     .pipe(first())
-    //     .subscribe({
-    //         next: () => {
-    //             this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-    //             this.router.navigate(['../login'], { relativeTo: this.route });
-    //         },
-    //         error: error => {
-    //             this.alertService.error(error);
-    //             this.loading = false;
-    //         }
-    //     });
+    this.accountService.resetPassword(this.form.value)
+        .subscribe({
+            next: () => {
+                this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+                this.router.navigate(['/account/login']);
+            },
+            error: error => {
+                this.alertService.error(error?.message);
+                this.loading = false;
+            }
+        });
   }
 }

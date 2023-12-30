@@ -7,6 +7,7 @@ import { LayoutComponent } from './layout.component';
 import { LoginComponent } from './login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { AccountService } from '@app/_services';
 
 @NgModule({
     imports: [
@@ -20,6 +21,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
         ResetPasswordComponent,
         CreateUserComponent
     ],
+    providers:[AccountService]
 
 })
 export class AccountModule { }

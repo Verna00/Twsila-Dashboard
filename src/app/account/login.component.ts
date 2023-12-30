@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     error:any
+    showReset:boolean=false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -50,10 +51,17 @@ export class LoginComponent implements OnInit {
         this.accountService.login(this.f['login'].value, this.f['password'].value)
             .pipe(first())
             .subscribe({
-                next: () => {
-                    // get return url from query parameters or default to home page
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                next: (res:any) => {
+                  if(res?.result?.user?.admin?.shouldRedirectToResetPasswordPage){
+                    // this.router.navigateByUrl('/account/change-password');
+                    this.accountService.logout(false)
+                    this.showReset=true
+                  }else{
+                       // get return url from query parameters or default to home page
+                    const returnUrl = '/';
                     this.router.navigateByUrl(returnUrl);
+                  }
+
                 },
                 error: (error: any) => {
                     this.error = error?.message;

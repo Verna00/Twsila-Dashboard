@@ -28,7 +28,7 @@ export class CreateUserComponent implements OnInit {
     this.Addform = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+      email: ['', [Validators.required]],
       mobile: ['', Validators.required],
       password: ['', [Validators.minLength(8), ...(!this.id ? [Validators.required] : [])]]
     });
@@ -78,7 +78,7 @@ export class CreateUserComponent implements OnInit {
           console.log(res, 'res');
 
           this.alertService.success('User saved', { keepAfterRouteChange: true });
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          const returnUrl =  '/';
           this.router.navigateByUrl(returnUrl);
         },
         error: (error) => {
