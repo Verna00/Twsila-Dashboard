@@ -8,14 +8,21 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { RippleModule } from 'primeng/ripple';
 import { MenuModule } from 'primeng/menu';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
   declarations: [
     AdminUserComponent,
+    CreateUserComponent,
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    DropdownModule,
     DashboardRoutingModule,
     SidebarModule,
     ButtonModule,
@@ -23,6 +30,7 @@ import { MenuModule } from 'primeng/menu';
     RippleModule,
     ButtonModule ,
     TableModule,
+    MultiSelectModule
   ]
 })
 export class DashboardModule { }

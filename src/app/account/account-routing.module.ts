@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { LoginComponent } from './login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { CreateUserComponent } from './create-user/create-user.component';
+import { CreateUserComponent } from '../dashboard/create-user/create-user.component';
+import { AuthGuard } from '@app/_helpers';
 
 const routes: Routes = [
     {
@@ -12,9 +13,6 @@ const routes: Routes = [
         children: [
             { path: 'login', component: LoginComponent },
             { path: 'change-password', component: ResetPasswordComponent },
-            { path: 'create-account', component: CreateUserComponent },
-
-
         ]
     }
 ];

@@ -1,5 +1,5 @@
 <div class="container-fluid ">
-  <header class="mt-3"><img src="../../assets/img/twsel.svg" class="logo"></header>
+  <!-- <header class="mt-3"><img src="../../assets/img/twsel.svg" class="logo"></header> -->
   <div class="row">
     <div class="col-md-2">
     </div>
@@ -10,6 +10,8 @@
     </div>
   </div>
   <form *ngIf="!loading" [formGroup]="Addform" (ngSubmit)="onSubmit()">
+    <div *ngIf="message" [class]="className">{{message}}</div>
+    {{Addform.value| json}}
     <!-- firstName -->
     <div class="row">
       <div class="mb-3 col">
@@ -55,12 +57,36 @@
         </div>
       </div>
 </div>
+  <!-- Roles -->
+  <div class="row">
+    <div class="mb-3 col">
+      <label class="form-label">
+        Roles
+      </label>
+      <!-- <p-dropdown [options]="privilegeList"
+      (onChange)="mapArray($event)"
+      optionLabel="value"
+      optionValue="id"
+      [ngClass]="{ 'is-invalid': submitted && f.roles.errors }"
+       formControlName="roles">
+      </p-dropdown> -->
+      <select #rolesOPT pSelectForm controlId="roles" class="form-control" (change)="addRole(rolesOPT.value)" formControlName="roles">
+        <option style="color: grey;" aria-readonly="true"> select privilege </option>
+        <ng-container *ngFor="let privilege of privilegeList"  >
+          <option *ngIf="privilege?.display"  [value]="privilege?.id" >{{privilege?.value}}</option>
+        </ng-container>
+      </select>
+
+      <div *ngIf="submitted && f.roles.errors" class="invalid-feedback">
+        <div *ngIf="f.roles.errors.required">Roles is required</div>
+      </div>
+    </div>
+  </div>
     <!-- Password -->
     <div class="row">
       <div class="mb-3 col">
         <label class="form-label">
           Password
-          <em *ngIf="id">(Leave blank to keep the same password)</em>
         </label>
         <input type="password" formControlName="password" class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
@@ -70,18 +96,40 @@
         </div>
       </div>
     </div>
-    <!---->
+    <!--privilege table-->
+    <p-table *ngIf="selectedPrivilegeList?.length > 0" [value]="selectedPrivilegeList" [paginator]="true" [rows]="4">
+      <ng-template pTemplate="header" [sortable]="true">
+          <tr>
+              <th class="header-col">roles</th>
+              <th class="header-col"></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+          <tr>
+              <td>{{ item.value }}</td>
+              <td>
+                <svg
+                (click)="removeRole(item)"
+                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+   <!---->
     <div class="row">
     <div class="mb-3 text-center">
       <button [disabled]="submitting || Addform.invalid" class="btn btn-primary login-btn">
         <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
         Create Account
       </button>
-      <div>
+      <!-- <div>
         <small>
           Do you have an account <a routerLink="/account/login">login</a>
         </small>
-      </div>
+      </div> -->
 
       <!-- <a routerLink="/users" class="btn btn-link">Cancel</a> -->
     </div>

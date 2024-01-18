@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit {
       {
         items: [
           {
+            label: 'Create Account', "routerLink": ['/create-account']
+          },
+          {
             label: 'logout', command: () => this.logout()
           }
         ]

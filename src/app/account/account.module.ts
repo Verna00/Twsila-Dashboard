@@ -6,7 +6,6 @@ import { AccountRoutingModule } from './account-routing.module';
 import { LayoutComponent } from './layout.component';
 import { LoginComponent } from './login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { CreateUserComponent } from './create-user/create-user.component';
 import { AccountService } from '@app/_services';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { AccountService } from '@app/_services';
         LayoutComponent,
         LoginComponent,
         ResetPasswordComponent,
-        CreateUserComponent
     ],
     providers:[AccountService]
 
