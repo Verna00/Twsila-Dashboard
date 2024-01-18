@@ -28,7 +28,7 @@ export class AdminUserComponent implements OnInit {
   constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
-    this.getalluser()
+    this.getAllUser()
   }
   createItem() {
     // You can implement the logic to create a new item here
@@ -41,10 +41,20 @@ export class AdminUserComponent implements OnInit {
     // For demonstration purposes, let's log the item being edited
     console.log('Editing:', item);
   }
-getalluser(){
+getAllUser(){
   // this.accountService.getAll()
   // .pipe(first())
   // .subscribe(users => this.users = users);
+  this.accountService.getAllAdmins().subscribe({
+    next:(res:any)=>{
+      this.users = res?.result
+      console.log('res',res);
+
+    },error:(err:any)=>{
+      console.log(err ,'err');
+
+    }
+  })
 }
 
   deleteUser(id: string) {

@@ -13,23 +13,22 @@
     </div>
 
 
-    <p-table [value]="items" [paginator]="true" [rows]="4">
+    <p-table [value]="users" [paginator]="true" [rows]="4">
         <ng-template pTemplate="header" [sortable]="true">
             <tr>
-                <th class="header-col">Name</th>
+                <th class="header-col">Full Name</th>
                 <th class="header-col">email</th>
-                <th class="header-col">Role</th>
-                <th class="header-col">Actions</th>
+                <th class="header-col">mobile</th>
                 <th class="header-col"></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-item>
+        <ng-template  pTemplate="body" let-user>
             <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.email }}</td>
-                <td>{{ item.role }}</td>
+                <td>{{ user.firstName }} {{" "}} {{user.lastName}}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.mobile }}</td>
                 <td>
-                    <button pButton type="button" label="Edit" class="p-button-warning" (click)="editItem(item)"></button>
+                    <button pButton type="button" label="Edit" class="p-button-warning" (click)="editItem(user)"></button>
 
                 </td>
                 <td>
@@ -37,11 +36,13 @@
 
                 </td>
             </tr>
-            <!-- <tr *ngIf="!users">
-                <td colspan="4" class="text-center">
-                    <span class="spinner-border spinner-border-lg align-center"></span>
-                </td>
-            </tr> -->
         </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4" class="text-center">
+              there is no users
+            </td>
+          </tr>
+      </ng-template>
     </p-table>
 </div>

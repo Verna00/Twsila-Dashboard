@@ -71,5 +71,8 @@ export class AccountService {
 
     }
 
+    getAllAdmins(){
+      return this.http.get(`${environment.apiUrl}/admins/all`)
+    }
 
 }

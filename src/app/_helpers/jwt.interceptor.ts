@@ -15,7 +15,9 @@ export class JwtInterceptor implements HttpInterceptor {
         if (isLoggedIn && isApiUrl) {
             request = request.clone({
                 setHeaders: {
-                  accessToken: `Bearer ${this.accountService.getToken()}`
+                  accessToken: `Bearer ${this.accountService.getToken()}`,
+                  'User-Type':'ADMIN',
+                  'Accept-Language' : 'en'
                 }
             });
         return next.handle(request);
