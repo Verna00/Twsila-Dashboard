@@ -11,7 +11,6 @@
   </div>
   <form *ngIf="!loading" [formGroup]="Addform" (ngSubmit)="onSubmit()">
     <div *ngIf="message" [class]="className">{{message}}</div>
-    {{Addform.value| json}}
     <!-- firstName -->
     <div class="row">
       <div class="mb-3 col">

@@ -28,7 +28,6 @@ export class AccountService {
             .pipe(map((user:any) => {
                 localStorage.setItem('token' , user?.result?.accessToken)
                 localStorage.setItem('refresh-token',user?.result?.refreshToken)
-                console.log(user,'ddd login');
                 this.userSubject.next(user);
                 return user;
             }));

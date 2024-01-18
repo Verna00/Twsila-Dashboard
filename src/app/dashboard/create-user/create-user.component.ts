@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Privileges, Privileges_List } from '@app/_models';
@@ -8,7 +8,7 @@ import { AccountService, AlertService } from '@app/_services';
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss']
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit ,OnDestroy {
   Addform!: FormGroup;
   id?: string;
   title!: string;
@@ -27,6 +27,9 @@ export class CreateUserComponent implements OnInit {
     private accountService: AccountService,
     private alertService: AlertService
   ) { }
+  ngOnDestroy(): void {
+    this.resetFormAndData()
+  }
 
   ngOnInit() {
   this.privilegeList = Privileges_List
@@ -67,10 +70,7 @@ export class CreateUserComponent implements OnInit {
     return true;
   }
   onSubmit() {
-    console.log(this.Addform.value, 'ddd');
     this.changeRoleFormat()
-    console.log(this.roles, 'roles');
-
 
     this.submitted = true;
 
@@ -108,20 +108,14 @@ export class CreateUserComponent implements OnInit {
     this.privilegeList.forEach((privilege:any)=>{
       if(privilege.id==privilegeID){
         privilege.display = false
-        console.log('1',this.selectedPrivilegeList.find((role:any)=> role?.id == privilegeID) );
-
         if(this.selectedPrivilegeList.find((role:any)=> role?.id == privilegeID) == -1 || this.selectedPrivilegeList.find((role:any)=> role?.id == privilegeID) == undefined){
-        console.log('23');
-        this.selectedPrivilegeList.push(privilege)
-
+          this.selectedPrivilegeList.push(privilege)
         }
       }
     })
   }
   removeRole(privilege:any){
-    console.log(privilege , 'ddd');
     const index = this.selectedPrivilegeList.indexOf(privilege);
-    console.log('privilege', index);
     if (index > -1) { // only splice array when item is found
       this.selectedPrivilegeList.splice(index, 1); // 2nd parameter means remove one item only
     }
@@ -136,17 +130,11 @@ export class CreateUserComponent implements OnInit {
   }
 
   changeRoleFormat(){
-    console.log(this.selectedPrivilegeList,'dddddddd');
-
      this.selectedPrivilegeList.forEach((Privilege:any)=>{
       if(this.roles.find((role:any)=>{role.id  == Privilege.id}) == -1 || this.roles.find((role:any)=>{role.id  == Privilege.id}) == undefined){
-        console.log('ffffff',Privilege);
-
         this.roles.push({id:Privilege.id})
       }
      })
-     console.log(this.roles, 'roles');
-
   }
   resetFormAndData(){
     this.Addform.reset()
