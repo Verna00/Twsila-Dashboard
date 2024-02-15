@@ -51,16 +51,16 @@ export class AccountService {
       return localStorage.getItem('token')
     }
 
-    logout(routeOrNot?:boolean) {
+    logout() {
       if(localStorage.getItem('refresh-token')){
         let refreshToken = localStorage.getItem('refresh-token')
         this.http.post(`${environment.apiUrl}/api/v1/auth/logout`,{refreshToken:refreshToken}).subscribe({
           next:(res:any)=>{
-            localStorage.removeItem('user');
+            localStorage.removeItem('refresh-token');
             localStorage.removeItem('token');
+            localStorage.removeItem('pwdChanged');
             this.userSubject.next(null);
-            if(routeOrNot)
-              this.router.navigate(['/account/login']);
+            this.router.navigate(['/account/login']);
           },error:(err:any)=>{
             console.log(err);
 
@@ -72,6 +72,10 @@ export class AccountService {
 
     getAllAdmins(){
       return this.http.get(`${environment.apiUrl}/admins/all`)
+    }
+
+    getAdminRoles(adminId){
+      return this.http.post(`${environment.apiUrl}/roles/by-admin-id/`+adminId,'')
     }
 
 }

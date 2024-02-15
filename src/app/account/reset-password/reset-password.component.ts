@@ -18,7 +18,6 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
     private alertService: AlertService
@@ -51,10 +50,12 @@ export class ResetPasswordComponent implements OnInit {
     this.accountService.resetPassword(this.form.value)
         .subscribe({
             next: () => {
+              localStorage.setItem("pwdChanged",'true')
                 this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-                this.router.navigate(['/account/login']);
+                this.router.navigate(['/'])
             },
             error: error => {
+              localStorage.setItem("pwdChanged",'false')
                 this.alertService.error(error?.message);
                 this.loading = false;
             }

@@ -88,11 +88,12 @@ export class CreateUserComponent implements OnInit ,OnDestroy {
         next: (res: any) => {
           console.log(res, 'res');
           this.message = 'User saved'
-          this.className = 'alert alert-sucess'
+          this.className = 'alert alert-success'
           this.alertService.success('User saved', { keepAfterRouteChange: true });
           // const returnUrl =  '/';
           // this.router.navigateByUrl(returnUrl);
           this.resetFormAndData()
+          this.router.navigate(['']);
         },
         error: (error) => {
           console.log(error, 'err');
@@ -137,8 +138,11 @@ export class CreateUserComponent implements OnInit ,OnDestroy {
      })
   }
   resetFormAndData(){
-    this.Addform.reset()
+    // this.Addform.get('firstName').patchValue(" ")
     this.roles = []
+    this.submitting = false
+    this.submitted = false;
+    this.Addform.reset()
     this.selectedPrivilegeList = []
   }
 }
